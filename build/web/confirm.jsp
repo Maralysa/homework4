@@ -5,7 +5,10 @@
 
 <c:import url="/includes/header.html"/>
 
-<a href="/checkout.jsp" title="Checkout">Check out a book</a>
-<a href="/manage.jsp" title="Manage">Manage checked out books</a>
+<p>Thank you for your patronage of the Belk Library. You've successfully 
+   checked out the book, ___. Please note that this book is due back on
+   ___. A friendly email reminder will be sent to you if your book becomes
+   overdue.</p>
+<p><a href="/manage.jsp" title="Manage">Return to front page</a></p>
 
   <c:import url="includes/footer.html"/>

@@ -6,7 +6,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>LibraryServlet</servlet-name>
-        <url-pattern>/LibraryServlet</url-pattern>
+        <url-pattern>/library</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

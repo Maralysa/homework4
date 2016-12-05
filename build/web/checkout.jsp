@@ -5,24 +5,28 @@
 
 <c:import url="/includes/header.html"/>
 
-    <form action="lib" method="post">
+<h2>Checkout a book</h2>
+
+    <form action="library" method="post">
     <input type="hidden" name="action" value="checkout">
-    <p><label>First Name</label> 
+    <p><label>First Name:</label> 
       <input type="text" name="firstName" 
              title="First Name"
-             required value="${sessionScope.invest}"> </p>
-    <p><label>Last Name</label>
+             required></p>
+    <p><label>Last Name:</label>
       <input type="text" name="lastName" 
              title="Last Name"
-             required value="${sessionScope.interest}"></p>
-    <p><label>Email Address</label>
+             required></p>
+    <p><label>Email Address:</label>
       <input type="email" name="email"
-             title="Email Address" required > </p>
-    <p><label>Book Title</label> 
+             title="Email Address"
+             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+             required></p>
+    <p><label>Book Title:</label> 
       <input type="text" name="bookTitle" 
              title="Book Title"
-             required value="${sessionScope.invest}"> </p>
-    <p><label id="blank-label">&nbsp;</label>
+             required></p>
+    <p><label>&nbsp;</label>
       <input type="submit" name="submit" value="Checkout"></p>
   </form>
     
