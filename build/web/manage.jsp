@@ -14,16 +14,18 @@
       <th>Overdue</th>
       <th></th>
     </tr>
-    <c:forEach var="item" items="">
+    <c:forEach var="item" items="${users}">
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>${item.firstName}</td>
+          <td>${item.lastName}</td>
+          <td>${item.email}</td>
+          <td>${item.bookTitle}</td>
+          <td>${item.dueDate}</td>
           <td></td>
         </tr>
     </c:forEach>
   </table>
+
+<p><a href="library" title="Index">Return to front page</a></p>
 
 <c:import url="includes/footer.html"/>

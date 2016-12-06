@@ -9,6 +9,6 @@
    checked out the book, ___. Please note that this book is due back on
    ___. A friendly email reminder will be sent to you if your book becomes
    overdue.</p>
-<p><a href="/manage.jsp" title="Manage">Return to front page</a></p>
+<p><a href="library" title="Index">Return to front page</a></p>
 
   <c:import url="includes/footer.html"/>

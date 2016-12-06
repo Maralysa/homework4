@@ -3,8 +3,10 @@
 package edu.elon.library;
 
 import edu.elon.bean.User;
+import edu.elon.data.UserDB;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +36,8 @@ public class LibraryServlet extends HttpServlet {
         else if (action.equals("checkout")) {
             // direct to confirm.jsp
             url = "/confirm.jsp";
-
+//            ArrayList<User> users = UserDB.getUsers();
+//            System.out.println(users.get(0));
             // get parameters from the request
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
@@ -47,7 +50,14 @@ public class LibraryServlet extends HttpServlet {
             // set Bean object in request object
             request.setAttribute("user", user);
 
+        } else if (action.equals("display")) {
+            url = "/manage.jsp";
+           
+            ArrayList<User> users = UserDB.getUsers();
+            
+            request.setAttribute("users", users);
         }
+        
         getServletContext().getRequestDispatcher(url).
                 forward(request, response);
 
