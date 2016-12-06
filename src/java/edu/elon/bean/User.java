@@ -2,9 +2,17 @@
 
 package edu.elon.bean;
 
-import java.sql.Date;
+import edu.elon.data.UserDB;
+import java.util.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.*;
 
 public class User {
     private String firstName;
@@ -12,6 +20,7 @@ public class User {
     private String email;
     private String bookTitle;
     private Date dueDate;
+    private boolean overdue;
     
     public User() {
     firstName = "";
@@ -19,6 +28,7 @@ public class User {
     email = "";
     bookTitle = "";
     dueDate = null;
+    overdue = false;
     }
     
     public User(String first, String last, String eml, String book) {
@@ -27,12 +37,34 @@ public class User {
     email = eml;
     bookTitle = book;
     dueDate = calculateDueDate();
+    overdue = reallyOverdue();
     }
     
     private Date calculateDueDate() {
         Calendar cal = GregorianCalendar.getInstance();
         cal.add(Calendar.WEEK_OF_YEAR, 2);
-        return new java.sql.Date(cal.getTime().getTime());
+        
+        Date date = cal.getTime();
+        
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+//        java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
+        
+        return sqlDate;
+    }
+    
+    public String getFormattedDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+        String formatted = sdf.format(dueDate);
+        return formatted;
+    }
+    
+    public boolean reallyOverdue() {
+        Calendar cal = GregorianCalendar.getInstance();
+        Date today = cal.getTime();
+        if (today.after(dueDate)) {
+            return true;
+        }
+        return false;
     }
     
     /**
@@ -104,4 +136,21 @@ public class User {
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
+
+    /**
+     * @return the overdue
+     */
+    public boolean isOverdue() {
+        return overdue;
+    }
+    
+    /**
+     * @param overdue the overdue to set
+     */
+    public void setOverdue(boolean overdue) {
+        this.overdue = overdue;
+    }
+
+    
+    
 }

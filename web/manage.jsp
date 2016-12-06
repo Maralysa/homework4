@@ -16,12 +16,16 @@
     </tr>
     <c:forEach var="item" items="${users}">
         <tr>
-          <td>${item.firstName}</td>
-          <td>${item.lastName}</td>
+          <td>${item.firstName} ${item.lastName}</td>
           <td>${item.email}</td>
           <td>${item.bookTitle}</td>
-          <td>${item.dueDate}</td>
-          <td></td>
+          <td>${item.formattedDate}</td>
+          <td><c:if test="${item.overdue}">overdue</c:if></td>
+          <td>
+              <a href="library?action=checkIn&amp;email=${item.email}">
+                <input type="submit" name="CheckIn" value="Check In">
+              </a>
+          </td>
         </tr>
     </c:forEach>
   </table>

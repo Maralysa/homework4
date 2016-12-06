@@ -5,7 +5,7 @@
 
 <c:import url="/includes/header.html"/>
 
-<p><a href="checkout.jsp" title="Checkout">Check out a book</a></p>
-<p><a href="manage.jsp" title="Manage" name="action" value="display">Manage checked out books</a></p>
+<p id="index-p1"><a href="checkout.jsp" title="Checkout">Check out a book</a></p>
+<p id="index-p2"><a href="library?action=display" title="Manage">Manage checked out books</a></p>
 
   <c:import url="includes/footer.html"/>
