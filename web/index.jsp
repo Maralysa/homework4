@@ -8,4 +8,4 @@
 <p id="index-p1"><a href="checkout.jsp" title="Checkout">Check out a book</a></p>
 <p id="index-p2"><a href="library?action=display" title="Manage">Manage checked out books</a></p>
 
-  <c:import url="includes/footer.html"/>
+<c:import url="includes/footer.html"/>

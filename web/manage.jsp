@@ -4,11 +4,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="/includes/header.html"/>
-    
+
+<h2 id="manage-h2">Currently checked out books</h2>
+
 <table>
     <tr>
       <th>Patron Name</th>
-      <th>Email</th>
+      <th>Email Address</th>
       <th>Book Title</th>
       <th>Due Date</th>
       <th>Overdue</th>
@@ -30,6 +32,6 @@
     </c:forEach>
   </table>
 
-<p><a href="library" title="Index">Return to front page</a></p>
+<p id="manage-a"><a href="library" title="Index">Return to front page</a></p>
 
 <c:import url="includes/footer.html"/>
