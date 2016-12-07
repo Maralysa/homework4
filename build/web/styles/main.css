@@ -83,6 +83,10 @@ form #submit {
   margin-bottom: 2.2em;
 }
 
+#confirm-a a {
+  margin-left: 1.8em;
+}
+
 /* manage.jsp */
 #manage-h2 {
   margin: .8em;
@@ -103,6 +107,10 @@ th, td {
 
 #manage-a {
   margin-bottom: 2.2em;
+}
+
+#manage-a a {
+  margin-left: 1.2em;
 }
 
 #footer {
