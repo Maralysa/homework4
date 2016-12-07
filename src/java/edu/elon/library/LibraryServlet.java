@@ -5,7 +5,6 @@ package edu.elon.library;
 import edu.elon.bean.User;
 import edu.elon.data.UserDB;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;

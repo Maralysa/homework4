@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS libusers;
-CREATE DATABASE libusers;
+DROP DATABASE IF EXISTS livelaughlove;
+CREATE DATABASE livelaughlove;
 
-USE libusers;
+USE livelaughlove;
 
 CREATE TABLE users(firstName VARCHAR(40), 
 					lastName VARCHAR(40), 

@@ -1,18 +1,9 @@
+/* 2016 © Lane Peeler & Jasmine Jones */
 package edu.elon.data;
 
 import java.sql.*;
 
 public class DBClose {
-
-    public static void closeConnection(Connection c) {
-        try {
-            if (c != null) {
-                c.close();
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
 
     public static void closePreparedStatement(Statement ps) {
         try {

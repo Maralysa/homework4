@@ -4,7 +4,6 @@ package edu.elon.data;
 import edu.elon.bean.User;
 import java.sql.Date;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,23 +13,16 @@ import java.util.ArrayList;
 public class UserDB {
 
     public static int insert(User user) throws SQLException {
-        
-        Connection connection = null;
+
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
         PreparedStatement ps = null;
-        
+
         String query
                 = "INSERT INTO users (firstName, lastName, email, bookTitle, dueDate) "
                 + "VALUES (?, ?, ?, ?, ?)";
         try {
-            //load the driver
-            Class.forName("com.mysql.jdbc.Driver");
-            
-            String url = "jdbc:mysql://localhost:3306/libusers";
-            String username = "root";
-            String password = "mysqluser";
 
-            connection = DriverManager.getConnection(url, username, password);
-            
             ps = connection.prepareStatement(query);
             ps.setString(1, user.getFirstName());
             ps.setString(2, user.getLastName());
@@ -38,60 +30,48 @@ public class UserDB {
             ps.setString(4, user.getBookTitle());
             ps.setDate(5, (Date) user.getDueDate());
             return ps.executeUpdate();
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             System.out.println(e);
             return 0;
         } finally {
             DBClose.closePreparedStatement(ps);
-            DBClose.closeConnection(connection);
+            pool.freeConnection(connection);
         }
     }
-    public static int checkIn(User user) throws SQLException {
-        
-        Connection connection = null;
-        PreparedStatement ps = null;
-        
-        String query
-                = "DELETE FROM users WHERE email=?";
-        try {
-            //load the driver
-            Class.forName("com.mysql.jdbc.Driver");
-            
-            String url = "jdbc:mysql://localhost:3306/libusers";
-            String username = "root";
-            String password = "mysqluser";
 
-            connection = DriverManager.getConnection(url, username, password);
-            
+    public static int checkIn(User user) throws SQLException {
+
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+
+        String query
+                = "DELETE FROM users WHERE email = ?";
+        try {
+
             ps = connection.prepareStatement(query);
             ps.setString(1, user.getEmail());
             return ps.executeUpdate();
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             System.out.println(e);
             return 0;
         } finally {
             DBClose.closePreparedStatement(ps);
-            DBClose.closeConnection(connection);
+            pool.freeConnection(connection);
         }
     }
-    
-        public static ArrayList<User> getUsers() {
+
+    public static ArrayList<User> getUsers() {
         ArrayList<User> users = new ArrayList<>();
-        Connection connection = null;
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         String query = "SELECT * FROM users";
-        
+
         try {
-            //load the driver
-            Class.forName("com.mysql.jdbc.Driver");
-            
-            String url = "jdbc:mysql://localhost:3306/libusers";
-            String username = "root";
-            String password = "mysqluser";
-            connection = DriverManager.getConnection(url, username, password);
-            
+
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
             User user = null;
@@ -107,32 +87,26 @@ public class UserDB {
                 users.add(user);
             }
             return users;
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             System.out.println(e);
             return null;
         } finally {
             DBClose.closeResultSet(rs);
             DBClose.closePreparedStatement(ps);
-            DBClose.closeConnection(connection);
+            pool.freeConnection(connection);
         }
     }
-        public static User getUser(String email) {
-        Connection connection = null;
+
+    public static User getUser(String email) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String query = "SELECT * FROM users WHERE email=?";
-        
+        String query = "SELECT * FROM users WHERE email = ?";
+
         try {
-            //load the driver
-            Class.forName("com.mysql.jdbc.Driver");
-            
-            String url = "jdbc:mysql://localhost:3306/libusers";
-            String username = "root";
-            String password = "mysqluser";
-            
-            connection = DriverManager.getConnection(url, username, password);
-            
+
             ps = connection.prepareStatement(query);
             ps.setString(1, email);
             rs = ps.executeQuery();
@@ -146,13 +120,13 @@ public class UserDB {
                 user.setDueDate(rs.getDate("dueDate"));
             }
             return user;
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             System.out.println(e);
             return null;
         } finally {
             DBClose.closeResultSet(rs);
             DBClose.closePreparedStatement(ps);
-            DBClose.closeConnection(connection);
+            pool.freeConnection(connection);
         }
     }
 }

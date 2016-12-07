@@ -2,17 +2,10 @@
 
 package edu.elon.bean;
 
-import edu.elon.data.UserDB;
-import java.util.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.*;
+import java.util.Date;
 
 public class User {
     private String firstName;
@@ -47,7 +40,6 @@ public class User {
         Date date = cal.getTime();
         
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-//        java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
         
         return sqlDate;
     }
@@ -61,10 +53,7 @@ public class User {
     public boolean reallyOverdue() {
         Calendar cal = GregorianCalendar.getInstance();
         Date today = cal.getTime();
-        if (today.after(dueDate)) {
-            return true;
-        }
-        return false;
+        return today.after(dueDate);
     }
     
     /**
